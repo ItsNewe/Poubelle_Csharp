@@ -1,0 +1,6 @@
+c:\users\newe\documents\visual studio 2015\Projects\Tp1_Calculator\Tp1_Calculator\bin\Debug\Tp1_Calculator.exe.config
+C:\Users\Newe\Documents\Visual Studio 2015\Projects\Tp1_Calculator\Tp1_Calculator\bin\Debug\Tp1_Calculator.exe
+C:\Users\Newe\Documents\Visual Studio 2015\Projects\Tp1_Calculator\Tp1_Calculator\bin\Debug\Tp1_Calculator.pdb
+C:\Users\Newe\Documents\Visual Studio 2015\Projects\Tp1_Calculator\Tp1_Calculator\obj\Debug\Tp1_Calculator.csprojResolveAssemblyReference.cache
+C:\Users\Newe\Documents\Visual Studio 2015\Projects\Tp1_Calculator\Tp1_Calculator\obj\Debug\Tp1_Calculator.exe
+C:\Users\Newe\Documents\Visual Studio 2015\Projects\Tp1_Calculator\Tp1_Calculator\obj\Debug\Tp1_Calculator.pdb
