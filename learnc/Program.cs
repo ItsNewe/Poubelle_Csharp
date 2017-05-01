@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,9 @@ namespace learnc
         // METHODS ////
         static void SayHi()
         {
-            Console.WriteLine("Hello World!"); //Will print "Hello World!" when called
+            Console.WriteLine("Hello World!"); //Will print "Hello WOrld!" when called
         }
+
 
         // METHOD PARAMETERS ////
         static void Print2(int x)
@@ -88,6 +90,68 @@ namespace learnc
                 Console.WriteLine();
             }
         }
+        class Cat
+        {
+            public static int count = 0; //a static member makes it belong to the class itself, No matter how many objects of the class are created, there is only one copy of the static member.
+            public Cat()
+            {
+                count++; //Cat +1
+            }
+        }
+
+        class Clients //#13
+        {
+            private string[] names = new string[10];
+
+            public string this[int index]
+            {
+                get
+                {
+                    return names[index];
+                }
+                set
+                {
+                    names[index] = value;
+                }
+            }
+        }
+
+        class Box //[#14]
+        {
+            public int Height { get; set; }
+            public int Width { get; set; }
+            public Box(int h, int w)
+            {
+                Height = h;
+                Width = w;
+            }
+        }
+        //INHERITANCE
+        class Animal //We define our base class
+        {
+            public int Legs { get; set; }
+            public int Age { get; set; }
+        }
+
+        class dog : Animal //Then we define our derived class
+        {
+            public dog()  //All public members of Animal become public members of Dog. That is why we can access the Legs member in the Dog constructor.
+            {
+                Legs = 4;
+            }
+            public void Bark()
+            {
+                Console.Write("Woof");
+            }
+        }
+
+        //GENERIC METHODS
+        static void Swap<T>(ref T ai, ref T bi) //T is a generic type (we can use it with <int>,<string>...), see #852
+        {
+            T temp = ai;
+            ai = bi;
+            bi = temp;
+        }
         //END OF METHODS
 
         //CLASSES & OBJECTS
@@ -97,6 +161,14 @@ namespace learnc
         {
             private int age; //Can't be accessed from public, field
             private string name; //Can't be accessed from public, can be replaced by the following property if no custom logic is needed
+
+            //readonly
+
+            private readonly string NAme = "John"; //The readonly modifier prevents a member of a class from being modified after construction.
+                                                   //It means that the field declared as readonly can be modified only when you declare it or from within a constructor.
+
+            protected int agE { get; set; }
+            protected string namE { get; set; }
 
             /*  public Person(string nm) //Can be accessed from public, used to modify the private value
                 {
@@ -110,7 +182,9 @@ namespace learnc
             public int Age
             {
                 get { return age; }
-                set { if (value > 0)
+                set
+                {
+                    if (value > 0)
                         age = value;
                 }
             }
@@ -125,13 +199,31 @@ namespace learnc
 
         }
 
+        class Student : Person
+        {
+            public Student(string nm)
+            {
+                Name = nm;
+            }
+
+            public void Speak()
+            {
+                Console.Write("Name: " + Name);
+            }
+        }
+
         class Dog
         {
             public string name;
             public int age;
-            public Dog(){
+            public static void Bark() //Static members can be called using the class name itself, following the example at #12 [CTRL+F]
+            {
+                Console.WriteLine("Woof");
+            }
+            public Dog()
+            {
                 Console.WriteLine("Constructor");
-                }
+            }
             ~Dog()
             {
                 Console.WriteLine("Destructor");
@@ -155,6 +247,21 @@ namespace learnc
             }
         }
 
+        //GENERIC CLASSES
+        class Stack<T> //Same as generic methods but for classes, #853
+        {
+            int index = 0;
+            T[] innerArray = new T[100];
+            public void Push(T item)
+            {
+                innerArray[index++] = item;
+            }
+            public T Pop()
+            {
+                return innerArray[--index];
+            }
+            public T Get(int k) { return innerArray[k]; }
+        }
         //END OF CLASSES
         static void Main(string[] args)
         {
@@ -162,7 +269,7 @@ namespace learnc
             const double Pi = 3.14;
 
             var a = 10;
-                a++; //Adds 1
+            a++; //Adds 1
             Console.WriteLine(a); //Outputs 11
 
             /* if (condition)
@@ -242,12 +349,12 @@ namespace learnc
             } while (b < 5);
 
             // Outputs
-          /*0
-            1
-            2
-            3
-            4
-            */
+            /*0
+              1
+              2
+              3
+              4
+              */
             //If the condition of the do -while loop evaluates to false, the statements in the do will still run once
 
             //LOGICAL OPERATORS 
@@ -289,7 +396,7 @@ namespace learnc
 
             int res = Area(w: 5, h: 8); //Calls the Area method, with the values given in the disorder. Doesn't afectates method because they are named
             Console.WriteLine(res);
-        
+
             Console.WriteLine(Fact(6)); //Calls the Fact method
             //Outputs 720
 
@@ -308,7 +415,7 @@ namespace learnc
             Dog bob = new Dog();
             bob.name = "Bobby";
             bob.age = 3;
-            Console.WriteLine(bob.age); // Prints "3"
+            Console.WriteLine(bob.age);
 
             //ARRAYS
             int[] myArray = new int[5]; //An array is an object that will hold any given number of values of the same type
@@ -343,7 +450,7 @@ namespace learnc
             {
                 for (int j = 0; j < 2; j++)
                 {
-                    Console.Write(someNums[k, j] + " "); // []= 1 dimension, [,] = 2 dimensions, [, ,] = 3 dimensions, and so on
+                    //  Console.Write(someNums[k, j] + " "); // []= 1 dimension, [,] = 2 dimensions, [, ,] = 3 dimensions, and so on
                 }
                 Console.WriteLine(); //Goes to the next line when a row is done printing
             }
@@ -400,8 +507,136 @@ namespace learnc
             Console.WriteLine(Environment.NewLine + "Press any key to exit..");
             Console.ReadKey();
 
+            Dog.Bark(); //#12
+            // Outputs "Woof"
 
-            
+            string str = "Hello World"; //An indexer allows objects to be indexed like an array. 
+            char r = str[4];
+            Console.WriteLine(r);
+            //Outputs "o"
+
+
+            Clients cl = new Clients(); //[#13]
+            cl[0] = "Dave";
+            cl[1] = "Bob";
+
+            Console.WriteLine(c[1]); //When calling for the Client class, we use indexes
+                                     //Outputs "Bob"  
+
+            Box b1 = new Box(14, 3);  //We would like to add these two Box objects, which would result in a new, bigger Box.
+            Box b2 = new Box(5, 7);   //So, basically, we would like the following code to work
+                                      /*Box b3 = b1 + b2;
+
+                                      Console.WriteLine(b3.Height); //19
+                                      Console.WriteLine(b3.Width); //10 */
+
+            dog d = new dog();
+            Console.WriteLine(d.Legs);
+            // Outputs 4
+
+            d.Bark();
+            //Outputs "Woof"
+
+            //Up to this point, we have worked exclusively with public and private access modifiers.
+            //Public members may be accessed from anywhere outside of the class, while access to private members is limited to their class. 
+            //The protected access modifier is very similar to private with one difference; it can be accessed in the derived classes.So, a protected member is accessible only from derived classes
+            Student s = new Student("David");
+            s.Speak();//Outputs "Name: David"
+
+
+            //ERROR HANDLING
+            int result = 0;
+            int num1 = 8;
+            int num2 = 4;
+            try
+            {
+                result = num1 / num2;
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine("Error");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine(result); //executes whether an exception is thrown or not
+            }
+
+            //FILES
+            string stri = "Some text";
+            File.WriteAllText("test.txt", stri); //Creates a file with the specified path and writes the given param to it
+
+            string txt = File.ReadAllText("test.txt");
+            Console.WriteLine(txt); //This reads from the file and outputs it's content
+
+            /*
+             * The following methods are available in the File class:
+            AppendAllText() - appends text to the end of the file.
+            Create() - creates a file in the specified location.
+            Delete() - deletes the specified file.
+            Exists() - determines whether the specified file exists.
+            Copy() - copies a file to a new location.
+            Move() - moves a specified file to a new location */
+
+            int ai = 4, bi = 9; //852
+            Swap<int>(ref a, ref b);
+            //Now b is 4, a is 9
+
+            string xi = "Hello";
+            string yi = "World";
+            Swap<string>(ref xi, ref yi);
+            //Now x is "World", y is "Hello"
+
+            Stack<int> intStack = new Stack<int>(); //#853
+            Stack<string> strStack = new Stack<string>();
+            Stack<Person> PersonStack = new Stack<Person>();
+
+            intStack.Push(3);
+            intStack.Push(6);
+            intStack.Push(7);
+
+            Console.WriteLine(intStack.Get(1));
+
+            //COLLECTIONS
+            List<string> colors = new List<string>();
+            colors.Add("Red");
+            colors.Add("Green");
+            colors.Add("Pink");
+            colors.Add("Blue");
+
+            foreach (var color in colors)
+            {
+                Console.WriteLine(color);
+            }
+            /*Outputs
+            Red
+            Green
+            Pink
+            Blue
+            */
+
+            /*
+             * Add adds an element to the List.
+                Clear removes all elements from the List.
+                Contains determines whether the specified element is contained in the List.
+                Count returns the number of elements in the List.
+                Insert adds an element at the specified index.
+                Reverse reverses the order of the elements in the List.
+                So why use Lists instead of arrays?
+                Because, unlike arrays, the group of objects you work with in a collection can grow and shrink dynamically. */
+
+            /* Commonly used generic collection types include:
+             * Dictionary<TKey, TValue> represents a collection of key/value pairs that are organized based on the key.
+            List<T> represents a list of objects that can be accessed by index. Provides methods to search, sort, and modify lists.
+            Queue<T> represents a first in, first out (FIFO) collection of objects.
+        S   tack<T> represents a last in, first out (LIFO) collection of objects.*/
         }
-    }
+        //ENUMS
+        enum Days { Sun, Mon, Tue = 4, Wed, Thu, Fri, Sat }; //0,1,4,5...
+int daynum = (int)Days.Tue; //Outputs 4
+enum TrafficLights { Green, Red, Yellow };
+}
 }
