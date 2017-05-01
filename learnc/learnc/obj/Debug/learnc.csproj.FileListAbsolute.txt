@@ -1,6 +1,0 @@
-c:\users\newe\documents\visual studio 2015\Projects\learnc\learnc\bin\Debug\learnc.exe.config
-c:\users\newe\documents\visual studio 2015\Projects\learnc\learnc\obj\Debug\learnc.csprojResolveAssemblyReference.cache
-c:\users\newe\documents\visual studio 2015\Projects\learnc\learnc\bin\Debug\learnc.exe
-c:\users\newe\documents\visual studio 2015\Projects\learnc\learnc\bin\Debug\learnc.pdb
-c:\users\newe\documents\visual studio 2015\Projects\learnc\learnc\obj\Debug\learnc.exe
-c:\users\newe\documents\visual studio 2015\Projects\learnc\learnc\obj\Debug\learnc.pdb
