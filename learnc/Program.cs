@@ -12,7 +12,7 @@ namespace learnc
         // METHODS ////
         static void SayHi()
         {
-            Console.WriteLine("Hello World!"); //Will print "Hello World!" when called
+            Console.WriteLine("Hello World!"); //Will print "Hello WOrld!" when called
         }
 
         // METHOD PARAMETERS ////
@@ -155,6 +155,52 @@ namespace learnc
             }
         }
 
+        //POLYMORPHISM
+        class Shape
+        {
+            public virtual void Draw()
+            {
+                Console.Write("Base Draw");
+            }
+        }
+        class Circle : Shape
+        {
+            public override void Draw()
+            {
+                // draw a circle...
+                Console.WriteLine("Circle Draw");
+            }
+        }
+        class Rectangle : Shape
+        {
+            public override void Draw()
+            {
+                // draw a rectangle...
+                Console.WriteLine("Rect Draw");
+            }
+        }
+        //Polymorphism end
+
+        //ABSTRACT                                  //- An abstract class cannot be instantiated.
+        abstract class ShapeAb                      //- An abstract class cannot be instantiated.
+        {                                           //- An abstract class may contain abstract methods and accessors.
+            public abstract void Draw();            //- A non-abstract class derived from an abstract class must include actual implementations of all inherited abstract methods and accessors.
+        }
+        class CircleAb : Shape
+        {
+            public override void Draw()
+            {
+                Console.WriteLine("Circle Draw");
+            }
+        }
+        class RectangleAb : Shape
+        {
+            public override void Draw()
+            {
+                Console.WriteLine("Rect Draw");
+            }
+        }
+        //Abstract end
         //END OF CLASSES
         static void Main(string[] args)
         {
@@ -308,7 +354,7 @@ namespace learnc
             Dog bob = new Dog();
             bob.name = "Bobby";
             bob.age = 3;
-            Console.WriteLine(bob.age); // Prints "3"
+            Console.WriteLine(bob.age);
 
             //ARRAYS
             int[] myArray = new int[5]; //An array is an object that will hold any given number of values of the same type
@@ -395,6 +441,13 @@ namespace learnc
             c = c.Substring(2); //Substring(index, length) returns a substring of the specified length, starting from the specified 
             Console.WriteLine(a); //index. If length is not specified, the operation continues to the end of the string.
             //Outputs "am"
+
+
+
+
+            Shape cAb = new Circle(); //abstract
+            cAb.Draw();
+            //Outputs "Circle Draw"
 
             //END OF PROGRAM, EXIT CONDITION
             Console.WriteLine(Environment.NewLine + "Press any key to exit..");
